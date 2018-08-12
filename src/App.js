@@ -5,24 +5,48 @@ import './App.css';
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('4db68098d46f4ef89bb5fbc60e217d41');
 
-const getCurrentDate = () => {
+
+
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      football: [
+        {
+          title: 'Loading',
+          url: '',
+          img: '',
+          description: '',
+          source: ''
+        }
+      ]
+    }
+    console.log("state",this.state.football);
+    this.setFootball();
+  }
+
+
+//Returns current date in appropriate format
+getCurrentDate = () => {
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
   var yyyy = today.getFullYear();
 
   if(dd<10) {
-      dd = '0'+dd
+      dd = '0'+dd;
   } 
 
   if(mm<10) {
-      mm = '0'+mm
+      mm = '0'+mm;
   } 
 
   today = yyyy + "-" + mm + "-" + dd;
   return today;
 }
-const getInfo = (data) => {
+
+//Returns array with data
+getInfo = (data) => {
   let array = [];
   let size = data.totalResults;
 
@@ -40,36 +64,38 @@ const getInfo = (data) => {
     articleInfo.description = data.articles[i].description;
     array.push(articleInfo);
   }
-
-  console.log(array);
-
+  return array;
 }
 
 
 //Football
-newsapi.v2.everything({
-  sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
-  from: getCurrentDate(),
-  language: 'en',
-  sortBy: 'popularity',
-  q: '+nba +basketball'
+setFootball = () => {
+  newsapi.v2.everything({
+    sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
+    from: this.getCurrentDate(),
+    language: 'en',
+    sortBy: 'popularity',
+    q: '+nba +basketball'
+  }).then(response => {
+    console.log(response);
+    // ans = this.getInfo(response);
+    // console.log('ans', ans);
+    this.setState({football: this.getInfo(response)});
 
-}).then(response => {
-  console.log(response);
-  getInfo(response);
-  /*
-    {
-      status: "ok",
-      articles: [...]
-    }
-  */
-});
+    /*
+      {
+        status: "ok",
+        articles: [...]
+      }
+    */
+  });
+}
 
-class App extends Component {
   render() {
+    console.log('football', this.state.football[0]);
     return (
       <div className="App">
-        <Link />
+        <Link articleInfo={this.state.football[0]} />
       </div>
     );
   }
