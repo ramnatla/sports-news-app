@@ -5,7 +5,7 @@ const Link = ({articleInfo}) => {
 	let {description, img, source, title, url} = articleInfo;
 	
 	return (
-		<div className='pl4 pr7 pb4'>
+		<div className='pb4'>
 			<a href={url} target='_blank' className='black'>
 			<div className='f3 tl link dim black'>
 				{`${title}`}

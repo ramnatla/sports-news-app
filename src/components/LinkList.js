@@ -9,7 +9,7 @@ const LinkList = ({linkArray}) => {
 	});
 
 	return (
-		<div>
+		<div className='pl3 pr3'>
 			{links}
 		</div>
 	);

@@ -27,10 +27,27 @@ class App extends Component {
           description: '',
           source: ''
         }
+      ],
+      baseball: [
+        {
+          title: 'Loading',
+          url: '',
+          img: '',
+          description: '',
+          source: ''
+        }
+      ],
+      soccer: [
+        {
+          title: 'Loading',
+          url: '',
+          img: '',
+          description: '',
+          source: ''
+        }
       ]
     }
-    console.log("state",this.state.football);
-    this.setFootball();
+    this.setArticleArray('+nfl +football', '+nba +basketball', '+mlb +baseball', '+soccer');
   }
 
 
@@ -76,18 +93,16 @@ getInfo = (data) => {
 }
 
 
-//Football
-setFootball = () => {
+//Sets football and basketeball article arrays in state
+setArticleArray = (footballQuery, basketballQuery, baseballQuery, soccerQuery) => {
   newsapi.v2.everything({
     sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
     from: this.getCurrentDate(),
     language: 'en',
     sortBy: 'popularity',
-    q: '+nba +basketball'
+    q: footballQuery
   }).then(response => {
-    console.log(response);
     this.setState({football: this.getInfo(response)});
-
     /*
       {
         status: "ok",
@@ -95,15 +110,65 @@ setFootball = () => {
       }
     */
   });
+
+  newsapi.v2.everything({
+    sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
+    from: this.getCurrentDate(),
+    language: 'en',
+    sortBy: 'popularity',
+    q: basketballQuery
+  }).then(response => {
+    this.setState({basketball: this.getInfo(response)});
+  });
+
+  newsapi.v2.everything({
+    sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
+    from: this.getCurrentDate(),
+    language: 'en',
+    sortBy: 'popularity',
+    q: baseballQuery
+  }).then(response => {
+    this.setState({baseball: this.getInfo(response)});
+  });
+
+  newsapi.v2.everything({
+    sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
+    from: this.getCurrentDate(),
+    language: 'en',
+    sortBy: 'popularity',
+    q: soccerQuery
+  }).then(response => {
+    this.setState({soccer: this.getInfo(response)});
+  });
 }
 
   render() {
-    console.log('football', this.state.football[0]);
     return (
       <div className="App">
-        {//<Link articleInfo={this.state.football[0]} />
-          }
-        <LinkList linkArray={this.state.football} />
+        <div className="firstSet">
+          <div>
+            <h1 className='tc'>Football</h1>
+            <LinkList linkArray={this.state.football} />
+          </div>
+
+          <div>
+            <h1 className='tc'>Basketball</h1>
+            <LinkList linkArray={this.state.basketball} />
+          </div>
+        </div>
+
+        <div className="secondSet">
+          <div>
+            <h1 className='tc'>Baseball</h1>
+            <LinkList linkArray={this.state.baseball} />
+          </div>
+
+          <div>
+            <h1 className='tc'>Soccer</h1>
+            <LinkList linkArray={this.state.soccer} />
+          </div>
+        </div>
+
       </div>
     );
   }
