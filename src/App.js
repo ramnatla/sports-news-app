@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import Link from './components/Link';
+import LinkList from './components/LinkList';
 import './App.css';
 
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('4db68098d46f4ef89bb5fbc60e217d41');
-
-
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
       football: [
+        {
+          title: 'Loading',
+          url: '',
+          img: '',
+          description: '',
+          source: ''
+        }
+      ],
+      basketball: [
         {
           title: 'Loading',
           url: '',
@@ -78,8 +86,6 @@ setFootball = () => {
     q: '+nba +basketball'
   }).then(response => {
     console.log(response);
-    // ans = this.getInfo(response);
-    // console.log('ans', ans);
     this.setState({football: this.getInfo(response)});
 
     /*
@@ -95,7 +101,9 @@ setFootball = () => {
     console.log('football', this.state.football[0]);
     return (
       <div className="App">
-        <Link articleInfo={this.state.football[0]} />
+        {//<Link articleInfo={this.state.football[0]} />
+          }
+        <LinkList linkArray={this.state.football} />
       </div>
     );
   }
