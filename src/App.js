@@ -47,7 +47,7 @@ class App extends Component {
         }
       ]
     }
-    this.setArticleArray('+nfl +football', '+nba +basketball', '+mlb +baseball', '+soccer');
+    this.setArticleArray();
   }
 
 
@@ -94,13 +94,13 @@ getInfo = (data) => {
 
 
 //Sets football and basketeball article arrays in state
-setArticleArray = (footballQuery, basketballQuery, baseballQuery, soccerQuery) => {
+setArticleArray = () => {
   newsapi.v2.everything({
     sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
     from: this.getCurrentDate(),
     language: 'en',
     sortBy: 'popularity',
-    q: footballQuery
+    q: '+nfl +football'
   }).then(response => {
     this.setState({football: this.getInfo(response)});
     /*
@@ -116,7 +116,7 @@ setArticleArray = (footballQuery, basketballQuery, baseballQuery, soccerQuery) =
     from: this.getCurrentDate(),
     language: 'en',
     sortBy: 'popularity',
-    q: basketballQuery
+    q: '+nba +basketball'
   }).then(response => {
     this.setState({basketball: this.getInfo(response)});
   });
@@ -126,17 +126,16 @@ setArticleArray = (footballQuery, basketballQuery, baseballQuery, soccerQuery) =
     from: this.getCurrentDate(),
     language: 'en',
     sortBy: 'popularity',
-    q: baseballQuery
+    q: '+mlb +baseball'
   }).then(response => {
     this.setState({baseball: this.getInfo(response)});
   });
 
   newsapi.v2.everything({
-    sources: 'bbc-sport,bleacher-report,espn,fox-sports,nfl-news,talksport,the-sport-bible',
     from: this.getCurrentDate(),
     language: 'en',
     sortBy: 'popularity',
-    q: soccerQuery
+    q: '(soccer OR football) AND (mls OR bpl OR liga OR premier) AND -nfl'
   }).then(response => {
     this.setState({soccer: this.getInfo(response)});
   });
@@ -146,24 +145,24 @@ setArticleArray = (footballQuery, basketballQuery, baseballQuery, soccerQuery) =
     return (
       <div className="App">
         <div className="firstSet">
-          <div>
+          <div className='w-50'>
             <h1 className='tc'>Football</h1>
             <LinkList linkArray={this.state.football} />
           </div>
 
-          <div>
+          <div className='w-50'>
             <h1 className='tc'>Basketball</h1>
             <LinkList linkArray={this.state.basketball} />
           </div>
         </div>
 
         <div className="secondSet">
-          <div>
+          <div className='w-50'>
             <h1 className='tc'>Baseball</h1>
             <LinkList linkArray={this.state.baseball} />
           </div>
 
-          <div>
+          <div className='w-50'>
             <h1 className='tc'>Soccer</h1>
             <LinkList linkArray={this.state.soccer} />
           </div>
