@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Link from './components/Link';
 import LinkList from './components/LinkList';
 import './App.css';
 
