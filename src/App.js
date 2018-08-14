@@ -144,8 +144,9 @@ setArticleArray = () => {
   render() {
     return (
       <div className="App">
-        <h1 className='f1 tc'>Ram's Sports News</h1>
-        <p className='tc f2'>Get today's most popular sport stories in a quick and easy fashion</p>
+        <h1 className='f1 tc'>Daily Sports Tribune</h1>
+        <p className='tc f2 ma0 pb2'>Find out about the top stories of the day from the sportsworld
+         in one convenient location!</p>
 
         <div className="firstSet">
           <div className='w-50'>
