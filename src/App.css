@@ -11,6 +11,10 @@
 	display: flex;
 }
 
+.header{
+	text-decoration: underline;
+}
+
 @font-face{
   font-family: 'Aller';
   src: local('Aller'), url('Aller_Rg.ttf') format('ttf');

@@ -144,26 +144,29 @@ setArticleArray = () => {
   render() {
     return (
       <div className="App">
+        <h1 className='f1 tc'>Ram's Sports News</h1>
+        <p className='tc f2'>Get today's most popular sport stories in a quick and easy fashion</p>
+
         <div className="firstSet">
           <div className='w-50'>
-            <h1 className='tc'>Football</h1>
+            <h1 className='tc header'>Top Football News</h1>
             <LinkList linkArray={this.state.football} />
           </div>
 
           <div className='w-50'>
-            <h1 className='tc'>Basketball</h1>
+            <h1 className='tc header'>Top Basketball News</h1>
             <LinkList linkArray={this.state.basketball} />
           </div>
         </div>
 
         <div className="secondSet">
           <div className='w-50'>
-            <h1 className='tc'>Baseball</h1>
+            <h1 className='tc header'>Top Baseball News</h1>
             <LinkList linkArray={this.state.baseball} />
           </div>
 
           <div className='w-50'>
-            <h1 className='tc'>Soccer</h1>
+            <h1 className='tc header'>Top Soccer News</h1>
             <LinkList linkArray={this.state.soccer} />
           </div>
         </div>
