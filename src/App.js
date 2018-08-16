@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import LinkList from './components/LinkList';
 import './App.css';
-import NewsAPI from './testApi.js'
+import NewsAPI from './newsAPI.js'
 
-//const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('4db68098d46f4ef89bb5fbc60e217d41');
-    // "newsapi": "^2.3.0",
 
 class App extends Component {
   constructor(){
