@@ -171,6 +171,8 @@ setArticleArray = () => {
           </div>
         </div>
 
+        <p className='tl f4 pl3'>Powered by News API</p>
+
       </div>
     );
   }
